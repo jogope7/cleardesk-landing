@@ -13,7 +13,7 @@ const steps = [
 
 export function InstallationSection() {
   return (
-    <section id="how-it-works" className="relative scroll-mt-24 py-24 overflow-hidden">
+    <section id="how-it-works" className="relative scroll-mt-24 py-16 overflow-hidden">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute right-0 top-1/4 h-[500px] w-[500px] translate-x-1/3 rounded-full bg-gradient-to-br from-violet-50 to-transparent blur-3xl" />

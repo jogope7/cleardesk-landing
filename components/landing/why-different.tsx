@@ -21,7 +21,7 @@ const otherToolsFeatures = [
 
 export function WhyDifferentSection() {
   return (
-    <section className="py-24">
+    <section className="py-16">
       <Container className="space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">

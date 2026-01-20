@@ -32,7 +32,7 @@ const items = [
 
 export function WhatYouGet() {
   return (
-    <section id="product" className="relative scroll-mt-24 py-24 overflow-hidden">
+    <section id="product" className="relative scroll-mt-24 py-16 overflow-hidden">
       {/* Subtle background accents */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/4 top-0 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-gradient-to-br from-emerald-50 to-transparent blur-3xl" />

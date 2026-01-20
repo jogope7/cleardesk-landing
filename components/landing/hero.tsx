@@ -128,7 +128,7 @@ export function Hero({ onHearExamples, onBookDemo }: HeroProps) {
   };
 
   return (
-    <section className="relative overflow-hidden pt-32 pb-24">
+    <section className="relative overflow-hidden pt-32 pb-16">
       {/* Subtle background accent */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute right-0 top-0 h-[500px] w-[500px] -translate-y-1/4 translate-x-1/4 rounded-full bg-gradient-to-br from-emerald-100/40 to-transparent blur-3xl" />

@@ -16,7 +16,7 @@ const tools = [
 
 export function IntegrationsSection() {
   return (
-    <section id="integrations" className="scroll-mt-24 py-24">
+    <section id="integrations" className="scroll-mt-24 py-16">
       <Container>
         <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-12 text-center">
           <h2 className="text-3xl font-bold text-zinc-900 mb-4">
@@ -34,7 +34,7 @@ export function IntegrationsSection() {
               </span>
             ))}
             <span className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white">
-              + more
+              + custom
             </span>
           </div>
 

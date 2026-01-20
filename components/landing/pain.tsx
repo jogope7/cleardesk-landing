@@ -13,7 +13,7 @@ const painPoints = [
 
 export function PainSection() {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       {/* Background accent */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-0 top-1/2 h-[400px] w-[400px] -translate-x-1/3 -translate-y-1/2 rounded-full bg-gradient-to-br from-red-50 to-transparent blur-3xl" />

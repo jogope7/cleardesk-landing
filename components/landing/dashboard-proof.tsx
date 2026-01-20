@@ -29,17 +29,25 @@ const callsData = [
 
 export function DashboardProof() {
   const [activeTab, setActiveTab] = React.useState<"logs" | "priority">("logs");
+  const [autoSwitch, setAutoSwitch] = React.useState(true);
 
-  // Auto-switch tabs every 5 seconds
+  // Auto-switch tabs every 5 seconds (only if autoSwitch is true)
   React.useEffect(() => {
+    if (!autoSwitch) return;
+    
     const interval = setInterval(() => {
       setActiveTab((prev) => (prev === "logs" ? "priority" : "logs"));
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [autoSwitch]);
+
+  const handleTabClick = (tab: "logs" | "priority") => {
+    setActiveTab(tab);
+    setAutoSwitch(false); // Stop auto-switching when user clicks
+  };
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       {/* Background accents */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute right-0 top-1/3 h-[500px] w-[500px] translate-x-1/3 rounded-full bg-gradient-to-br from-blue-50 to-transparent blur-3xl" />
@@ -83,7 +91,7 @@ export function DashboardProof() {
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    onClick={() => setActiveTab("logs")}
+                    onClick={() => handleTabClick("logs")}
                     className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                       activeTab === "logs"
                         ? "bg-zinc-900 text-white"
@@ -94,7 +102,7 @@ export function DashboardProof() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setActiveTab("priority")}
+                    onClick={() => handleTabClick("priority")}
                     className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                       activeTab === "priority"
                         ? "bg-zinc-900 text-white"
@@ -106,9 +114,10 @@ export function DashboardProof() {
                 </div>
               </div>
 
-              {/* Call Logs View */}
-              {activeTab === "logs" && (
-                <div className="space-y-4">
+              {/* Tab Content - Relative container for absolute positioning */}
+              <div className="relative">
+                {/* Call Logs View */}
+                <div className={`space-y-4 transition-opacity duration-300 ${activeTab === "logs" ? "opacity-100" : "opacity-0 absolute inset-0 pointer-events-none"}`}>
                   {/* Metrics - Mobile: 2 cols, Desktop: 5 cols */}
                   <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-5">
                     {metrics.map((metric) => (
@@ -171,15 +180,15 @@ export function DashboardProof() {
                     </div>
                   </div>
                 </div>
-              )}
 
-              {/* Call Priority View */}
-              {activeTab === "priority" && (
-                <div className="space-y-2">
+                {/* Call Priority View */}
+                <div className={`space-y-2 transition-opacity duration-300 ${activeTab === "priority" ? "opacity-100" : "opacity-0 absolute inset-0 pointer-events-none"}`}>
                   {[
                     { urgency: "4/10", urgencyColor: "text-amber-600 bg-amber-50", customer: "(555) 111-****", type: "No Response", status: "Needs Follow Up", statusColor: "bg-amber-100 text-amber-700" },
                     { urgency: "3/10", urgencyColor: "text-blue-600 bg-blue-50", customer: "(555) 222-****", type: "Unclear Intent", status: "Called", statusColor: "bg-emerald-100 text-emerald-700" },
                     { urgency: "5/10", urgencyColor: "text-orange-600 bg-orange-50", customer: "(555) 333-****", type: "Needs Info", status: "Pending", statusColor: "bg-zinc-100 text-zinc-700" },
+                    { urgency: "6/10", urgencyColor: "text-red-600 bg-red-50", customer: "(555) 444-****", type: "Complaint", status: "Urgent", statusColor: "bg-red-100 text-red-700" },
+                    { urgency: "2/10", urgencyColor: "text-emerald-600 bg-emerald-50", customer: "(555) 555-****", type: "General Inquiry", status: "Resolved", statusColor: "bg-emerald-100 text-emerald-700" },
                   ].map((row, index) => (
                     <div key={index} className="rounded-xl border border-zinc-100 bg-zinc-50/50 p-4">
                       <div className="flex items-center justify-between mb-3">
@@ -197,7 +206,7 @@ export function DashboardProof() {
                     </div>
                   ))}
                 </div>
-              )}
+              </div>
             </div>
           </div>
 

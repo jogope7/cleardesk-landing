@@ -30,7 +30,7 @@ export function CalculatorPreview() {
   };
 
   return (
-    <section id="calculator" className="scroll-mt-24 py-24 bg-zinc-950">
+    <section id="calculator" className="scroll-mt-24 py-16 bg-zinc-950">
       <Container className="space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">

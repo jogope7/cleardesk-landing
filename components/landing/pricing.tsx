@@ -25,7 +25,7 @@ const payAsYouGoFeatures = [
 
 export function PricingSection() {
   return (
-    <section className="py-24">
+    <section className="py-16">
       <Container className="space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
@@ -82,21 +82,21 @@ export function PricingSection() {
 
           {/* Pay As You Go */}
           <div className="rounded-2xl bg-zinc-900 p-8 relative overflow-hidden">
-            {/* Badge */}
-            <div className="absolute top-6 right-6">
-              <span className="rounded-full bg-emerald-500 px-3 py-1 text-xs font-medium text-white">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-800">
+                  <Building2 className="h-6 w-6 text-emerald-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Pay As You Go</h3>
+                  <p className="text-sm text-zinc-400">For bigger volumes</p>
+                </div>
+              </div>
+              
+              {/* Badge */}
+              <span className="rounded-full bg-emerald-500 px-3 py-1 text-xs font-medium text-white w-fit">
                 High volume
               </span>
-            </div>
-
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-800">
-                <Building2 className="h-6 w-6 text-emerald-400" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white">Pay As You Go</h3>
-                <p className="text-sm text-zinc-400">For bigger volumes</p>
-              </div>
             </div>
 
             <div className="mb-6">

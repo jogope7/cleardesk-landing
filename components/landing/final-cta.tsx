@@ -4,7 +4,7 @@ import { Headphones, Calendar } from "lucide-react";
 
 export function FinalCta() {
   return (
-    <section id="demo" className="scroll-mt-24 py-24 bg-zinc-900">
+    <section id="demo" className="scroll-mt-24 py-16 bg-zinc-900">
       <Container className="space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-4xl font-bold text-white sm:text-5xl">

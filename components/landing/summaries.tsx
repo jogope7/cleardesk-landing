@@ -5,7 +5,7 @@ import { Mail, Check, User, FileText, Clock } from "lucide-react";
 
 export function SummariesSection() {
   return (
-    <section className="py-24">
+    <section className="py-16">
       <Container className="space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">

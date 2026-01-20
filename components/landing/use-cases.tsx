@@ -118,7 +118,7 @@ export function UseCasesSection() {
   }, [activeTab, activeCase.conversation.messages.length]);
 
   return (
-    <section className="py-24">
+    <section className="py-16">
       <Container className="space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
@@ -132,13 +132,13 @@ export function UseCasesSection() {
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex justify-center gap-2">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
           {useCases.map((caseItem) => (
             <button
               key={caseItem.id}
               onClick={() => setActiveTab(caseItem.id)}
               className={cn(
-                "flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all",
+                "flex items-center gap-2 rounded-full px-4 sm:px-6 py-2 sm:py-3 text-sm font-medium transition-all whitespace-nowrap",
                 activeTab === caseItem.id
                   ? "bg-zinc-900 text-white"
                   : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
@@ -153,81 +153,72 @@ export function UseCasesSection() {
         {/* Content: Centered */}
         <div className="max-w-3xl mx-auto space-y-6">
           {/* Conversation Simulator */}
-          <div className="rounded-3xl bg-zinc-900 p-6">
+          <div className="rounded-3xl bg-zinc-900 shadow-2xl overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-center gap-2 border-b border-zinc-800 p-4">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-sm font-medium text-zinc-400">Live {activeCase.title} Call</span>
+                <span className="text-sm font-medium text-white">Live {activeCase.title} Call</span>
               </div>
-              <div className="flex items-center gap-2 text-zinc-500">
-                <Phone className="h-4 w-4" />
-                <span className="text-sm font-mono">00:47</span>
-              </div>
+              <span className="text-sm text-zinc-500 font-mono">00:47</span>
             </div>
 
-            {/* Message Display */}
-            <div className="min-h-[240px] flex flex-col">
-              {/* Speaker */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                  currentMessage.from === "ai" ? "bg-emerald-600" : "bg-zinc-700"
-                }`}>
-                  {currentMessage.from === "ai" ? (
-                    <Phone className="h-4 w-4 text-white" />
-                  ) : (
-                    <span className="text-xs font-medium text-white">
-                      {activeCase.conversation.caller.split(" ").map(n => n[0]).join("")}
-                    </span>
-                  )}
-                </div>
-                <span className="text-sm text-zinc-400">
-                  {currentMessage.from === "ai" ? "ClearDesk AI" : activeCase.conversation.caller}
-                </span>
-              </div>
-
-              {/* Message */}
-              <div className="flex-1 flex items-center">
-                <p
-                  className={cn(
-                    "text-xl font-medium leading-relaxed text-white transition-all duration-300",
-                    isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-                  )}
-                >
-                  {currentMessage.text}
-                </p>
-              </div>
-
-              {/* Progress dots */}
-              <div className="flex items-center gap-1 mt-6">
-                {activeCase.conversation.messages.map((_, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "h-1.5 rounded-full transition-all",
-                      i === msgIndex ? "w-6 bg-emerald-500" : "w-1.5 bg-zinc-700"
+            <div className="p-6">
+              {/* Message Display */}
+              <div className="min-h-[240px] flex flex-col">
+                {/* Speaker */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className={`flex h-8 w-8 items-center justify-center rounded-full ${
+                    currentMessage.from === "ai" ? "bg-emerald-600" : "bg-zinc-700"
+                  }`}>
+                    {currentMessage.from === "ai" ? (
+                      <Phone className="h-4 w-4 text-white" />
+                    ) : (
+                      <span className="text-xs font-medium text-white">
+                        {activeCase.conversation.caller.split(" ").map(n => n[0]).join("")}
+                      </span>
                     )}
-                  />
-                ))}
+                  </div>
+                  <span className="text-sm text-zinc-400">
+                    {currentMessage.from === "ai" ? "ClearDesk AI" : activeCase.conversation.caller}
+                  </span>
+                </div>
+
+                {/* Message */}
+                <div className="flex-1 flex items-center">
+                  <p
+                    className={cn(
+                      "text-xl font-medium leading-relaxed text-white transition-all duration-300",
+                      isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+                    )}
+                  >
+                    {currentMessage.text}
+                  </p>
+                </div>
+              </div>
+
+              {/* Call Controls */}
+              <div className="mt-8 flex justify-center pb-2">
+                <button className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20 text-red-500 transition-colors hover:bg-red-500/30">
+                  <Phone className="h-5 w-5 rotate-[135deg]" />
+                </button>
               </div>
             </div>
 
-            {/* Capabilities - Inside card at bottom */}
-            <div className="mt-6 pt-6 border-t border-zinc-800">
+            {/* Capabilities - Footer style */}
+            <div className="bg-zinc-950/50 p-6 border-t border-zinc-800">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-sm font-medium text-zinc-400">What it handles</span>
-                <span className="text-xs text-zinc-500">{activeCase.items.length} capabilities</span>
+                <span className="text-sm font-medium text-zinc-400">Capabilities used</span>
+                <span className="text-xs text-zinc-500">{activeCase.items.length} detected</span>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {activeCase.items.map((item) => (
                   <div 
                     key={item} 
-                    className="flex items-center gap-3 rounded-lg bg-zinc-800 px-4 py-3"
+                    className="flex items-center gap-3 rounded-lg bg-zinc-800/50 px-3 py-2"
                   >
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20">
-                      <Check className="h-3.5 w-3.5 text-emerald-400" />
-                    </div>
-                    <span className="text-sm font-medium text-white">{item}</span>
+                    <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                    <span className="text-sm text-zinc-300">{item}</span>
                   </div>
                 ))}
               </div>

@@ -116,25 +116,24 @@ export function ExamplesSection({ tab, onTabChange, highlightedId }: ExamplesPro
   };
 
   return (
-    <section id="examples" className="relative scroll-mt-24 py-24 overflow-hidden">
+    <section id="examples" className="relative scroll-mt-24 py-16 overflow-hidden bg-zinc-950">
       {/* Background */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-zinc-950" />
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/4 top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-gradient-to-br from-emerald-500/10 to-transparent blur-3xl" />
         <div className="absolute right-1/4 bottom-0 h-[500px] w-[500px] translate-y-1/2 rounded-full bg-gradient-to-tr from-blue-500/10 to-transparent blur-3xl" />
       </div>
 
-      <Container className="space-y-12">
+      <Container className="relative z-10 space-y-12">
         {/* Header */}
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-1.5 text-sm font-medium text-emerald-400">
             <Headphones className="h-4 w-4" />
-            Audio Examples
+            Real Examples
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Hear real call examples
           </h2>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto">
             No scripts. No demos. These are real conversations from production systems.
           </p>
         </div>

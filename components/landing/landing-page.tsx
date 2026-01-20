@@ -8,6 +8,7 @@ import { WhatYouGet } from "@/components/landing/what-you-get";
 import { PainSection } from "@/components/landing/pain";
 import { ExamplesSection, type ExampleCategory } from "@/components/landing/examples";
 import { DashboardProof } from "@/components/landing/dashboard-proof";
+import { AIIntelligenceSection } from "@/components/landing/ai-intelligence";
 import { InstallationSection } from "@/components/landing/installation";
 import { InstallOptions } from "@/components/landing/install-options";
 import { UseCasesSection } from "@/components/landing/use-cases";
@@ -62,6 +63,7 @@ export function LandingPage() {
           highlightedId={highlightedExample}
         />
         <DashboardProof />
+        <AIIntelligenceSection />
         <InstallationSection />
         <InstallOptions onSelectExample={handleSelectExample} />
         <UseCasesSection />
