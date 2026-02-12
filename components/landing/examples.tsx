@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/landing/container";
 import { cn } from "@/lib/utils";
-import { Headphones, Play, Phone, Pause } from "lucide-react";
+import { Headphones, Play, Phone, Pause, Clock } from "lucide-react";
 import * as React from "react";
 
 export type ExampleCategory = "All" | "Sales" | "Customer Service" | "Operations" | "Spanish";
@@ -15,6 +15,7 @@ export type AudioExample = {
   language: "English" | "Spanish";
   category: "Sales" | "Customer Service" | "Operations";
   src: string;
+  comingSoon?: boolean;
 };
 
 const tabs: ExampleCategory[] = [
@@ -32,7 +33,7 @@ export const audioExamples: AudioExample[] = [
     description: "Lead qualification and booking.",
     language: "English",
     category: "Sales",
-    src: "/audio/sales-en.mp3",
+    src: "/audio/sales call - english.mp3",
   },
   {
     id: "sales-es",
@@ -40,15 +41,16 @@ export const audioExamples: AudioExample[] = [
     description: "Same flow, in Spanish.",
     language: "Spanish",
     category: "Sales",
-    src: "/audio/sales-es.mp3",
+    src: "",
+    comingSoon: true,
   },
   {
     id: "support",
-    title: "Customer Service Call",
+    title: "Customer Service — FAQ",
     description: "FAQs handled with a clean resolution.",
     language: "English",
     category: "Customer Service",
-    src: "/audio/support.mp3",
+    src: "/audio/customer service - FAQ (en).mp3",
   },
   {
     id: "scheduling",
@@ -56,7 +58,7 @@ export const audioExamples: AudioExample[] = [
     description: "Booking and confirmation handled end to end.",
     language: "English",
     category: "Operations",
-    src: "/audio/scheduling.mp3",
+    src: "/audio/Scheduling and Operations Call (en).mp3",
   },
   {
     id: "overflow",
@@ -64,15 +66,15 @@ export const audioExamples: AudioExample[] = [
     description: "Overflow calls answered instantly.",
     language: "English",
     category: "Operations",
-    src: "/audio/overflow.mp3",
+    src: "/audio/Safety Net Takeover.mp3",
   },
   {
     id: "escalation",
-    title: "Escalation to Human",
+    title: "Customer Service — Escalation",
     description: "Handoff when a human is needed.",
     language: "English",
     category: "Customer Service",
-    src: "/audio/escalation.mp3",
+    src: "/audio/customer service - escalation (en).mp3",
   },
 ];
 
@@ -161,12 +163,14 @@ export function ExamplesSection({ tab, onTabChange, highlightedId }: ExamplesPro
           {filterExamples(tab).map((example) => {
             const isHighlighted = highlightedId === example.id;
             const isPlaying = playingId === example.id;
+            const isComingSoon = example.comingSoon;
             
             return (
               <div
                 key={example.id}
                 className={cn(
                   "group rounded-2xl border bg-zinc-900 p-5 transition-all",
+                  isComingSoon && "opacity-75",
                   isHighlighted
                     ? "border-emerald-500 ring-2 ring-emerald-500/20"
                     : "border-zinc-800 hover:border-zinc-700"
@@ -174,26 +178,39 @@ export function ExamplesSection({ tab, onTabChange, highlightedId }: ExamplesPro
               >
                 {/* Top row: Play button + Info */}
                 <div className="flex items-start gap-4">
-                  {/* Play Button */}
-                  <button
-                    onClick={() => handlePlayPause(example.id)}
-                    className={cn(
-                      "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-all",
-                      isPlaying
-                        ? "bg-emerald-500 text-white"
-                        : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white"
-                    )}
-                  >
-                    {isPlaying ? (
-                      <Pause className="h-6 w-6" fill="currentColor" />
-                    ) : (
-                      <Play className="h-6 w-6 ml-1" fill="currentColor" />
-                    )}
-                  </button>
+                  {/* Play Button or Coming Soon Icon */}
+                  {isComingSoon ? (
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-zinc-800/50 text-zinc-600">
+                      <Clock className="h-6 w-6" />
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => handlePlayPause(example.id)}
+                      className={cn(
+                        "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-all",
+                        isPlaying
+                          ? "bg-emerald-500 text-white"
+                          : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white"
+                      )}
+                    >
+                      {isPlaying ? (
+                        <Pause className="h-6 w-6" fill="currentColor" />
+                      ) : (
+                        <Play className="h-6 w-6 ml-1" fill="currentColor" />
+                      )}
+                    </button>
+                  )}
 
                   {/* Content */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-white truncate">{example.title}</h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold text-white truncate">{example.title}</h3>
+                      {isComingSoon && (
+                        <span className="shrink-0 rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-amber-400">
+                          Coming Soon
+                        </span>
+                      )}
+                    </div>
                     <p className="text-sm text-zinc-500 mt-0.5">{example.description}</p>
                     
                     {/* Badges */}
@@ -210,12 +227,14 @@ export function ExamplesSection({ tab, onTabChange, highlightedId }: ExamplesPro
                 </div>
 
                 {/* Hidden audio element */}
-                <audio
-                  ref={(el) => { audioRefs.current[example.id] = el; }}
-                  src={example.src}
-                  preload="none"
-                  onEnded={() => setPlayingId(null)}
-                />
+                {!isComingSoon && (
+                  <audio
+                    ref={(el) => { audioRefs.current[example.id] = el; }}
+                    src={example.src}
+                    preload="none"
+                    onEnded={() => setPlayingId(null)}
+                  />
+                )}
 
                 {/* Playing indicator */}
                 {isPlaying && (

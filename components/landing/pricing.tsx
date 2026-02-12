@@ -60,10 +60,10 @@ export function PricingSection() {
                 <span className="text-sm text-zinc-500">Starts at</span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-zinc-900">$400</span>
+                <span className="text-4xl font-bold text-zinc-900">$100</span>
                 <span className="text-zinc-500">/month</span>
               </div>
-              <p className="text-sm text-zinc-500 mt-1">2,000 mins included · Setup fee separate</p>
+              <p className="text-sm text-zinc-500 mt-1">450 mins included · Setup fee separate</p>
             </div>
 
             <div className="space-y-3 mb-8">
@@ -106,7 +106,7 @@ export function PricingSection() {
                 <span className="text-4xl font-bold text-white">$0.12</span>
                 <span className="text-zinc-400">/min</span>
               </div>
-              <p className="text-sm text-zinc-500 mt-1">Min 8,000 mins/mo · Setup fee separate</p>
+              <p className="text-sm text-zinc-500 mt-1">Min 25,000 mins/mo · Setup fee separate</p>
             </div>
 
             <div className="space-y-3 mb-8">
